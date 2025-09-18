@@ -1,10 +1,14 @@
 package bo.cirrus.demo.domain.port.out.repository;
 
+import java.util.List;
+
+import bo.cirrus.demo.domain.model.User;
+
 public interface UserRepository {
 
-    // TODO: Define user repository operations here for the following operations:
-    // - Save User
-    // - Find User by ID
-    // - Find User by Username or Email
-    // - List All Users
+    User save(User user);
+    User findById(Long id);
+    User findByUsername(String username);
+    User findByEmail(String email);
+    List<User> findAll();
 }
