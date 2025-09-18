@@ -1,9 +1,16 @@
 package bo.cirrus.demo.domain.port.in;
 
+import java.util.List;
+
+import bo.cirrus.demo.domain.model.Privilege;
+
 public interface PrivilegeManagementUseCase {
     
-    // TODO: Define privilege management operations here for the following operations:
-    // - Create Privilege
-    // - Find Privilege by Name or Resource Key
-    // - List All Privileges
+    Privilege createPrivilege(CreatePrivilegeRequest request);
+
+    Privilege findByNameOrResourceKey(String name, String resourceKey);
+
+    List<Privilege> listAllPrivileges();
+
+    record CreatePrivilegeRequest(String name, String resourceKey) { }
 }

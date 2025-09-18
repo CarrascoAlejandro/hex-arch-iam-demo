@@ -71,10 +71,13 @@ When fully implemented, this system will provide:
 - `POST /users/{userId}/privileges/{privilegeId}` - Assign privilege to user
 - `DELETE /users/{userId}/privileges/{privilegeId}` - Remove privilege from user
 
-### 2. Data Persistence
+### 2. Data Persistence & Database Portability
 - JPA entities with proper relationships
 - Repository implementations with CRUD operations
 - Database schema for users and privileges with many-to-many relationship
+- **Multi-Database Support**: Easy switching between MySQL and PostgreSQL
+- **Docker Infrastructure**: Containerized database setup with automated initialization
+- **Database-specific optimizations**: Tailored schemas and data types for each DBMS
 
 ### 3. Business Logic
 - Domain rules validation
@@ -87,10 +90,13 @@ When fully implemented, this system will provide:
 - Proper HTTP status codes
 - Comprehensive exception handling
 
-### 5. Testing
+### 5. Testing & API Validation
 - Unit tests for all business logic components
 - Mocked dependencies for isolated testing
 - High test coverage for core functionality
+- **API Testing Infrastructure**: Complete REST Client test suite for VSCode
+- **Automated API Testing**: Bruno collection with AI agent compatibility
+- **Multi-environment support**: Test configurations for different deployment targets
 
 ## 📋 TODO Checklist
 
@@ -98,7 +104,7 @@ When fully implemented, this system will provide:
 All TODOs have been converted to GitHub issues for better tracking and collaboration.
 
 ### 🎯 Domain Layer - Input Ports
-- [ ] [#1 Define User Management Use Case Operations](https://github.com/CarrascoAlejandro/hex-arch-iam-demo/issues/1)
+- [*] [#1 Define User Management Use Case Operations](https://github.com/CarrascoAlejandro/hex-arch-iam-demo/issues/1)
   - Create User operation
   - Find User by Username or Email operation
 - [ ] [#2 Define Privilege Management Use Case Operations](https://github.com/CarrascoAlejandro/hex-arch-iam-demo/issues/2)
@@ -162,18 +168,70 @@ All TODOs have been converted to GitHub issues for better tracking and collabora
   - Mocked repository dependencies
   - High test coverage
 
+### 🗄️ Database Infrastructure
+- [ ] [#14 Create Database Schema Files (MySQL & PostgreSQL)](https://github.com/CarrascoAlejandro/hex-arch-iam-demo/issues/14)
+  - Create crebas.sql for MySQL with optimized syntax and data types
+  - Create crebas.sql for PostgreSQL with optimized syntax and data types
+  - Include Users, Privileges, and User_Privileges tables
+  - Add proper indexes and foreign key constraints
+- [ ] [#15 Create Database Seed Data Files](https://github.com/CarrascoAlejandro/hex-arch-iam-demo/issues/15)
+  - Create init.sql for MySQL with sample users and privileges
+  - Create init.sql for PostgreSQL with sample users and privileges
+  - Include realistic test data for development and testing
+- [ ] [#16 Create Docker Compose with Multi-Database Support](https://github.com/CarrascoAlejandro/hex-arch-iam-demo/issues/16)
+  - Docker Compose file with MySQL and PostgreSQL containers
+  - Automatic loading of database structure and initial data
+  - Environment-specific configuration for easy database switching
+  - Volume mapping for data persistence
+
+### 🔧 API Testing Infrastructure  
+- [ ] [#17 Create REST Client Tests for VSCode](https://github.com/CarrascoAlejandro/hex-arch-iam-demo/issues/17)
+  - HTTP files compatible with REST Client VSCode extension
+  - Complete test coverage for all API endpoints
+  - Test cases for success and error scenarios
+  - Environment variables for different deployment targets
+- [ ] [#18 Create Bruno API Collection with AI Agent Support](https://github.com/CarrascoAlejandro/hex-arch-iam-demo/issues/18)
+  - Bruno collection with all API endpoints
+  - Automated test assertions for response validation
+  - Collection setup optimized for AI agent execution
+  - Error detection and reporting mechanisms
+
 ## 🛠️ Technology Stack
 
 - **Java 17+**
 - **Spring Boot** - Application framework
 - **Spring Data JPA** - Data persistence
 - **Spring Web** - REST API
-- **H2/PostgreSQL** - Database
+- **MySQL/PostgreSQL** - Database options (demonstrating portability)
+- **Docker & Docker Compose** - Containerization and multi-database setup
 - **JUnit 5** - Testing framework
 - **Mockito** - Mocking framework
 - **Maven** - Build tool
+- **REST Client Extension** - VSCode API testing
+- **Bruno** - API testing and collection management
 
-## 🚦 Getting Started
+## � Database Portability Demonstration
+
+One of the key benefits of hexagonal architecture is the ability to easily switch between different infrastructure components. This project demonstrates this principle by supporting both MySQL and PostgreSQL:
+
+### Database Support
+- **MySQL**: Optimized schema and data types for MySQL
+- **PostgreSQL**: Optimized schema and data types for PostgreSQL
+- **Easy Switching**: Change database with simple configuration updates
+- **Docker Setup**: Both databases available through Docker Compose
+
+### File Structure
+```
+src/main/resources/db/
+├── mysql/
+│   ├── crebas.sql    # MySQL-optimized schema
+│   └── init.sql      # MySQL sample data
+└── postgresql/
+    ├── crebas.sql    # PostgreSQL-optimized schema
+    └── init.sql      # PostgreSQL sample data
+```
+
+## �🚦 Getting Started
 
 1. **Clone the repository**
    ```bash
@@ -219,5 +277,94 @@ This hexagonal architecture implementation provides:
 - **Clean Code**: Following SOLID principles and clean architecture guidelines
 
 ---
+
+---
+
+## 📋 Additional Task Details
+
+### Database Infrastructure Tasks
+
+#### #14 - Database Schema Files (MySQL & PostgreSQL)
+**Purpose**: Demonstrate database portability in hexagonal architecture
+
+**Requirements**:
+- Create `src/main/resources/db/mysql/crebas.sql` with MySQL-optimized schema
+- Create `src/main/resources/db/postgresql/crebas.sql` with PostgreSQL-optimized schema
+- Include Users, Privileges, and User_Privileges tables with proper relationships
+- Add indexes and constraints optimized for each database type
+
+#### #15 - Database Seed Data Files  
+**Purpose**: Provide realistic test data for both database systems
+
+**Requirements**:
+- Create `src/main/resources/db/mysql/init.sql` with sample data for MySQL
+- Create `src/main/resources/db/postgresql/init.sql` with sample data for PostgreSQL
+- Include realistic users, privileges, and assignments for testing
+- Ensure data compatibility with respective database schemas
+
+#### #16 - Docker Compose Multi-Database Setup
+**Purpose**: Containerized environment showcasing database switching capability
+
+**Requirements**:
+- Docker Compose file with MySQL and PostgreSQL containers
+- Automatic loading of schema and seed data on container startup
+- Environment-specific configuration for easy database switching
+- Volume mapping for data persistence during development
+
+### API Testing Infrastructure Tasks
+
+#### #17 - REST Client Tests for VSCode
+**Purpose**: Complete API testing suite for development workflow
+
+**Requirements**:
+- Create `http/` folder with `.http` files compatible with REST Client extension
+- Cover all API endpoints: users, privileges, and privilege assignments
+- Include test cases for success scenarios, validation errors, and edge cases
+- Environment variables for different deployment targets (local, staging, etc.)
+
+**File Structure**:
+```
+http/
+├── users.http           # User management endpoints
+├── privileges.http      # Privilege management endpoints
+├── assignments.http     # Privilege assignment endpoints
+├── environment.http     # Environment variables
+└── README.md           # Usage instructions
+```
+
+#### #18 - Bruno API Collection with AI Agent Support
+**Purpose**: Automated API testing with AI agent compatibility for error detection
+
+**Requirements**:
+- Complete Bruno collection covering all API endpoints
+- Automated test assertions for response validation
+- Collection optimized for AI agent execution and error reporting
+- Pre-request scripts for test data setup
+- Post-request scripts for cleanup and validation
+
+**Features**:
+- Environment management for different deployment stages
+- Automated test data generation
+- Response validation with detailed assertions
+- Error detection and reporting mechanisms
+- AI agent-friendly collection structure for automated testing
+
+## 🔄 Database Switching Example
+
+Once implemented, switching between databases will be as simple as:
+
+```bash
+# Development with MySQL
+docker-compose up mysql -d
+export SPRING_PROFILES_ACTIVE=mysql
+./mvnw spring-boot:run
+
+# Development with PostgreSQL  
+docker-compose up postgresql -d
+export SPRING_PROFILES_ACTIVE=postgresql
+./mvnw spring-boot:run
+```
+
+This demonstrates the power of hexagonal architecture - the business logic remains completely unchanged while the infrastructure adapts to different database systems.
 
 *This project serves as a comprehensive example of implementing hexagonal architecture in a real-world scenario, focusing on IAM functionality that's commonly needed in enterprise applications.*
