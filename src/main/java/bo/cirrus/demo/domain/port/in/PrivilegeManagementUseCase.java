@@ -8,6 +8,8 @@ public interface PrivilegeManagementUseCase {
     
     Privilege createPrivilege(CreatePrivilegeRequest request);
 
+    Privilege findById(Long id);
+
     Privilege findByNameOrResourceKey(String name, String resourceKey);
 
     List<Privilege> listAllPrivileges();

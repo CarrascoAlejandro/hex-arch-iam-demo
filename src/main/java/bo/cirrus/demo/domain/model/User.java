@@ -6,16 +6,18 @@ public class User {
     private Long id;
     private String username;
     private String email;
+    private String password;
     private List<Privilege> privileges;
 
     public User() {
     }
 
-    public User(Long id, String username, String email, List<Privilege> privileges) {
+    public User(Long id, String username, String email, List<Privilege> privileges, String password) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.privileges = privileges;
+        this.password = password;
     }
 
     public Long getId() {
@@ -40,6 +42,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public List<Privilege> getPrivileges() {
