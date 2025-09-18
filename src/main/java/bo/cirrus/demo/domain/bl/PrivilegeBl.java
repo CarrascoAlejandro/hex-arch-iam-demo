@@ -2,35 +2,50 @@ package bo.cirrus.demo.domain.bl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import bo.cirrus.demo.domain.model.Privilege;
 import bo.cirrus.demo.domain.port.in.PrivilegeManagementUseCase;
+import bo.cirrus.demo.domain.port.out.repository.PrivilegeRepository;
 
 @Service
 public class PrivilegeBl implements PrivilegeManagementUseCase {
 
+    @Autowired
+    private PrivilegeRepository privilegeRepository;
+
     @Override
     public Privilege createPrivilege(CreatePrivilegeRequest request) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'createPrivilege'");
+        Privilege privilege = new Privilege();
+        privilege.setName(request.name());
+        privilege.setResourceKey(request.resourceKey());
+        return privilegeRepository.save(privilege);
     }
 
     @Override
     public Privilege findById(Long id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findById'");
+        return privilegeRepository.findById(id);
     }
 
     @Override
     public Privilege findByNameOrResourceKey(String name, String resourceKey) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'findByNameOrResourceKey'");
+        Privilege result;
+        if (name != null) {
+            result = privilegeRepository.findByName(name);
+        } else if (resourceKey != null) {
+            result = privilegeRepository.findByResourceKey(resourceKey);
+        } else {
+            throw new IllegalArgumentException("Either name or resourceKey must be provided");
+        }
+        if (result == null) {
+            throw new IllegalArgumentException("Privilege not found");
+        }
+        return result;
     }
 
     @Override
     public List<Privilege> listAllPrivileges() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'listAllPrivileges'");
+        return privilegeRepository.findAll();
     }
 }

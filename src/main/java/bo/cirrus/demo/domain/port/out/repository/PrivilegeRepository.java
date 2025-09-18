@@ -1,10 +1,14 @@
 package bo.cirrus.demo.domain.port.out.repository;
 
+import java.util.List;
+
+import bo.cirrus.demo.domain.model.Privilege;
+
 public interface PrivilegeRepository {
 
-    // TODO: Define privilege repository operations here for the following operations:
-    // - Save Privilege
-    // - Find Privilege by ID
-    // - Find Privilege by Name or Resource Key
-    // - List All Privileges
+    Privilege save(Privilege privilege);
+    Privilege findById(Long id);
+    Privilege findByName(String name);
+    Privilege findByResourceKey(String resourceKey);
+    List<Privilege> findAll();
 }

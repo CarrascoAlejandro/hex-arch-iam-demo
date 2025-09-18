@@ -29,12 +29,18 @@ public class UserBl implements UserManagementUseCase, PrivilegeAssignmentUseCase
 
     @Override
     public User findByUsernameOrEmail(String username, String email) {
+        User result;
         if (username != null) {
-            return userRepository.findByUsername(username);
+            result = userRepository.findByUsername(username);
         } else if (email != null) {
-            return userRepository.findByEmail(email);
+            result = userRepository.findByEmail(email);
+        } else {
+            throw new IllegalArgumentException("Either username or email must be provided");
         }
-        throw new IllegalArgumentException("Either username or email must be provided");
+        if (result == null) {
+            throw new IllegalArgumentException("User not found");
+        }
+        return result;
     }
 
     @Override
