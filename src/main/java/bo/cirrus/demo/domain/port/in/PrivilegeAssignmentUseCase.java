@@ -1,8 +1,11 @@
 package bo.cirrus.demo.domain.port.in;
 
+import bo.cirrus.demo.domain.model.User;
+
 public interface PrivilegeAssignmentUseCase {
     
-    // TODO: Define privilege assignment operations here for the following operations:
-    // - Assign Privilege to User
-    // - Remove Privilege from User
+    User assignPrivilegeToUser(UserPrivilegeRequest request);
+    User removePrivilegeFromUser(UserPrivilegeRequest request);
+
+    record UserPrivilegeRequest(String username, Long privilegeId) { }
 }
