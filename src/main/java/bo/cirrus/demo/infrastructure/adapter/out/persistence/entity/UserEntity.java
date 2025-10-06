@@ -25,6 +25,9 @@ public class UserEntity {
     @Column(name = "password", nullable = false)
     private String password;
 
+    public UserEntity() {
+    }
+
     public Long getId() {
         return id;
     }

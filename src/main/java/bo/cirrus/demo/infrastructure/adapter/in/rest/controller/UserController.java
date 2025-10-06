@@ -12,6 +12,8 @@ import bo.cirrus.demo.infrastructure.adapter.in.rest.mapper.UserWebMapper;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -32,18 +34,19 @@ public class UserController {
     }
 
     @PostMapping()
-    public GlobalWebResponseDto<UserWebResponseDto> createUser(@RequestBody CreateUserRequestDto dto) {
+    public ResponseEntity<GlobalWebResponseDto<UserWebResponseDto>> createUser(@RequestBody CreateUserRequestDto dto) {
         UserManagementUseCase.CreateUserRequest request = userWebMapper.webDtoToDomainCreateUserRequest(dto);
         User user = userManagementUseCase.createUser(request);
         UserWebResponseDto userResponse = userWebMapper.domainToWebResponseDto(user);
-        return new GlobalWebResponseDto<>("200", null, userResponse);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(new GlobalWebResponseDto<>("USR-1000", "User created successfully", userResponse));
     }
 
     @GetMapping()
-    public GlobalWebResponseDto<UserWebResponseDto> findByUsernameOrEmail(@RequestParam String username, @RequestParam String email) {
+    public ResponseEntity<GlobalWebResponseDto<UserWebResponseDto>> findByUsernameOrEmail(@RequestParam String username, @RequestParam String email) {
         User user = userManagementUseCase.findByUsernameOrEmail(username, email);
         UserWebResponseDto userResponse = userWebMapper.domainToWebResponseDto(user);
-        return new GlobalWebResponseDto<>("200", null, userResponse);
+        return ResponseEntity.ok(new GlobalWebResponseDto<>("USR-1000", null, userResponse));
     }
     
 }

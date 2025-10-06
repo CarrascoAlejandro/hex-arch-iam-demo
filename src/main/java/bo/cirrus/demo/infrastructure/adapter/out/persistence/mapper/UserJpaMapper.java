@@ -1,7 +1,6 @@
 package bo.cirrus.demo.infrastructure.adapter.out.persistence.mapper;
 
 import org.mapstruct.Mapper;
-import org.mapstruct.factory.Mappers;
 
 import bo.cirrus.demo.domain.model.User;
 import bo.cirrus.demo.infrastructure.adapter.out.persistence.entity.UserEntity;

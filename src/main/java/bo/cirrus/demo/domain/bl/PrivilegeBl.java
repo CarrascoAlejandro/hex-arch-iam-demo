@@ -2,7 +2,6 @@ package bo.cirrus.demo.domain.bl;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import bo.cirrus.demo.domain.model.Privilege;
@@ -12,8 +11,11 @@ import bo.cirrus.demo.domain.port.out.repository.PrivilegeRepository;
 @Service
 public class PrivilegeBl implements PrivilegeManagementUseCase {
 
-    @Autowired
-    private PrivilegeRepository privilegeRepository;
+    private final PrivilegeRepository privilegeRepository;
+
+    public PrivilegeBl(PrivilegeRepository privilegeRepository) {
+        this.privilegeRepository = privilegeRepository;
+    }
 
     @Override
     public Privilege createPrivilege(CreatePrivilegeRequest request) {
