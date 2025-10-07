@@ -10,6 +10,7 @@ import bo.cirrus.demo.infrastructure.adapter.in.rest.dto.AssignedPrivilegeWebRes
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING, uses = PrivilegeWebMapper.class)
 public interface AssignedPrivilegeWebMapper {
 
+    @Mapping(source = "assignedSince", target = "assignedSince", dateFormat = "yyyy-MM-dd HH:mm:ss")
     @Mapping(source = "privilege", target = "privilege")
     AssignedPrivilegeWebResponseDto domainToWebResponseDto(AssignedPrivilege assignedPrivilege);
 }

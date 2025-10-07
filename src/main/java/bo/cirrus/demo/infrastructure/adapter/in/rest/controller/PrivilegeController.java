@@ -83,4 +83,11 @@ public class PrivilegeController {
         return ResponseEntity.ok(new GlobalWebResponseDto<>("PRV-1001", "Privilege assigned to user successfully", response));
     }
 
+    @PostMapping("/remove")
+    public ResponseEntity<GlobalWebResponseDto<UserWebResponseDto>> removePrivilegeFromUser(@RequestBody AssignPrivilegeRequestDto requestDto) {
+        var assignment = privilegeWebMapper.webDtoToDomainAssignPrivilegeRequest(requestDto);
+        var response = userWebMapper.domainToWebResponseDto(privilegeAssignmentUseCase.removePrivilegeFromUser(assignment));
+        return ResponseEntity.ok(new GlobalWebResponseDto<>("PRV-1002", "Privilege removed from user successfully", response));
+    }
+
 }

@@ -1,14 +1,16 @@
 package bo.cirrus.demo.domain.model;
 
+import java.time.LocalDateTime;
+
 public class AssignedPrivilege {
     private Long id;
-    private String assignedSince;
+    private LocalDateTime assignedSince;
     private Privilege privilege;
 
     public AssignedPrivilege() {
     }
 
-    public AssignedPrivilege(Long id, String assignedSince, Privilege privilege) {
+    public AssignedPrivilege(Long id, LocalDateTime assignedSince, Privilege privilege) {
         this.id = id;
         this.assignedSince = assignedSince;
         this.privilege = privilege;
@@ -22,11 +24,11 @@ public class AssignedPrivilege {
         this.id = id;
     }
 
-    public String getAssignedSince() {
+    public LocalDateTime getAssignedSince() {
         return assignedSince;
     }
 
-    public void setAssignedSince(String assignedSince) {
+    public void setAssignedSince(LocalDateTime assignedSince) {
         this.assignedSince = assignedSince;
     }
 

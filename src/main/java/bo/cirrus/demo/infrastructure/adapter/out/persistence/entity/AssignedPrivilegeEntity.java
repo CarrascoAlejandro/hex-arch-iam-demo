@@ -1,5 +1,7 @@
 package bo.cirrus.demo.infrastructure.adapter.out.persistence.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -20,7 +22,7 @@ public class AssignedPrivilegeEntity {
     private Long id;
 
     @Column(name = "assigned_since", nullable = false)
-    private String assignedSince;
+    private LocalDateTime assignedSince;
 
     @ManyToOne(targetEntity = UserEntity.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -42,11 +44,11 @@ public class AssignedPrivilegeEntity {
         this.id = id;
     }
 
-    public String getAssignedSince() {
+    public LocalDateTime getAssignedSince() {
         return assignedSince;
     }
 
-    public void setAssignedSince(String assignedSince) {
+    public void setAssignedSince(LocalDateTime assignedSince) {
         this.assignedSince = assignedSince;
     }
 

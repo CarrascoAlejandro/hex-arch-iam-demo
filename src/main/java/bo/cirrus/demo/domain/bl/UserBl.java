@@ -1,5 +1,6 @@
 package bo.cirrus.demo.domain.bl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -9,6 +10,7 @@ import bo.cirrus.demo.domain.model.Privilege;
 import bo.cirrus.demo.domain.model.User;
 import bo.cirrus.demo.domain.port.in.PrivilegeAssignmentUseCase;
 import bo.cirrus.demo.domain.port.in.UserManagementUseCase;
+import bo.cirrus.demo.domain.port.out.repository.AssignedPrivilegeRepository;
 import bo.cirrus.demo.domain.port.out.repository.UserRepository;
 
 @Service
@@ -16,10 +18,16 @@ public class UserBl implements UserManagementUseCase, PrivilegeAssignmentUseCase
 
     private final UserRepository userRepository;
     private final PrivilegeBl privilegeBl;
+    private final AssignedPrivilegeRepository assignedPrivilegeRepository;
 
-    public UserBl(UserRepository userRepository, PrivilegeBl privilegeBl) {
+    public UserBl(
+        UserRepository userRepository, 
+        PrivilegeBl privilegeBl, 
+        AssignedPrivilegeRepository assignedPrivilegeRepository
+    ) {
         this.userRepository = userRepository;
         this.privilegeBl = privilegeBl;
+        this.assignedPrivilegeRepository = assignedPrivilegeRepository;
     }
 
     // Helper method to get privileges from assigned privileges
@@ -73,9 +81,16 @@ public class UserBl implements UserManagementUseCase, PrivilegeAssignmentUseCase
             throw new IllegalArgumentException("User already has this privilege assigned");
         }
 
-        // TODO: For now, we'll throw an exception as we need to implement the assignment logic properly
-        // This would require creating an AssignedPrivilege entity and adding it to the user
-        throw new UnsupportedOperationException("Privilege assignment not yet implemented with new structure");
+        // Create new AssignedPrivilege
+        AssignedPrivilege assignedPrivilege = new AssignedPrivilege();
+        assignedPrivilege.setPrivilege(privilege);
+        assignedPrivilege.setAssignedSince(LocalDateTime.now());
+
+        // Save the assignment
+        assignedPrivilegeRepository.saveWithUserId(assignedPrivilege, user.getId());
+
+        // Return updated user with privileges
+        return userRepository.findById(user.getId());
     }
 
     @Override
@@ -90,8 +105,15 @@ public class UserBl implements UserManagementUseCase, PrivilegeAssignmentUseCase
             throw new IllegalArgumentException("Privilege not found");
         }
 
-        // TODO: For now, we'll throw an exception as we need to implement the removal logic properly
-        // This would require removing the AssignedPrivilege entity from the user
-        throw new UnsupportedOperationException("Privilege removal not yet implemented with new structure");
+        // Check if user has this privilege
+        if (getPrivilegesFromUser(user).stream().noneMatch(p -> p.getId().equals(privilege.getId()))) {
+            throw new IllegalArgumentException("User does not have this privilege assigned");
+        }
+
+        // Remove the assignment
+        assignedPrivilegeRepository.deleteByUserIdAndPrivilegeId(user.getId(), privilege.getId());
+
+        // Return updated user with privileges
+        return userRepository.findById(user.getId());
     }
 }

@@ -1,0 +1,7 @@
+POST http://localhost:8888/privilege/assign
+Content-Type: application/json
+
+{
+    "username": "jperez",
+    "privilegeId": 3
+}

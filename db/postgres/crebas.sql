@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS privilege (
 
 CREATE TABLE IF NOT EXISTS assigned_privilege (
     id BIGSERIAL PRIMARY KEY,
-    assigned_since VARCHAR(255) NOT NULL,
+    assigned_since TIMESTAMP NOT NULL,
     user_id BIGINT NOT NULL,
     privilege_id BIGINT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES "user"(id),
