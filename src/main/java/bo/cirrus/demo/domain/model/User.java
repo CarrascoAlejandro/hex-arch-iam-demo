@@ -7,16 +7,16 @@ public class User {
     private String username;
     private String email;
     private String password;
-    private List<Privilege> privileges;
+    private List<AssignedPrivilege> assignedPrivileges;
 
     public User() {
     }
 
-    public User(Long id, String username, String email, List<Privilege> privileges, String password) {
+    public User(Long id, String username, String email, List<AssignedPrivilege> assignedPrivileges, String password) {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.privileges = privileges;
+        this.assignedPrivileges = assignedPrivileges;
         this.password = password;
     }
 
@@ -52,11 +52,11 @@ public class User {
         this.password = password;
     }
 
-    public List<Privilege> getPrivileges() {
-        return privileges;
+    public List<AssignedPrivilege> getAssignedPrivileges() {
+        return assignedPrivileges;
     }
 
-    public void setPrivileges(List<Privilege> privileges) {
-        this.privileges = privileges;
+    public void setAssignedPrivileges(List<AssignedPrivilege> assignedPrivileges) {
+        this.assignedPrivileges = assignedPrivileges;
     }
 }

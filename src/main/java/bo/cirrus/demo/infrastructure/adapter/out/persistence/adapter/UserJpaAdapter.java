@@ -34,17 +34,17 @@ public class UserJpaAdapter implements UserRepository {
 
     @Override
     public User findById(Long id) {
-        return userJpaMapper.entityToDomain(userRepositorySQL.findById(id).orElse(null));
+        return userJpaMapper.entityToDomain(userRepositorySQL.findByIdWithPrivileges(id).orElse(null));
     }
 
     @Override
     public User findByUsername(String username) {
-        return userJpaMapper.entityToDomain(userRepositorySQL.findByUsername(username).orElse(null));
+        return userJpaMapper.entityToDomain(userRepositorySQL.findByUsernameWithPrivileges(username).orElse(null));
     }
 
     @Override
     public User findByEmail(String email) {
-        return userJpaMapper.entityToDomain(userRepositorySQL.findByEmail(email).orElse(null));
+        return userJpaMapper.entityToDomain(userRepositorySQL.findByEmailWithPrivileges(email).orElse(null));
     }
 
     @Override

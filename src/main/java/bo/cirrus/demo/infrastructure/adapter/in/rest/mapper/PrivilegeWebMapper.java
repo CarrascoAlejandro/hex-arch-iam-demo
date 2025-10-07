@@ -4,7 +4,9 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;
 
 import bo.cirrus.demo.domain.model.Privilege;
+import bo.cirrus.demo.domain.port.in.PrivilegeAssignmentUseCase;
 import bo.cirrus.demo.domain.port.in.PrivilegeManagementUseCase;
+import bo.cirrus.demo.infrastructure.adapter.in.rest.dto.AssignPrivilegeRequestDto;
 import bo.cirrus.demo.infrastructure.adapter.in.rest.dto.CreatePrivilegeRequestDto;
 import bo.cirrus.demo.infrastructure.adapter.in.rest.dto.PrivilegeWebResponseDto;
 
@@ -14,4 +16,6 @@ public interface PrivilegeWebMapper {
     PrivilegeWebResponseDto toWebResponseDto(Privilege privilege);
 
     PrivilegeManagementUseCase.CreatePrivilegeRequest webDtoToDomainCreatePrivilegeRequest(CreatePrivilegeRequestDto dto);
+
+    PrivilegeAssignmentUseCase.UserPrivilegeRequest webDtoToDomainAssignPrivilegeRequest(AssignPrivilegeRequestDto dto);
 }

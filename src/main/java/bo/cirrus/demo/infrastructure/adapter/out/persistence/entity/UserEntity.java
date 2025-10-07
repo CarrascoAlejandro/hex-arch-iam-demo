@@ -67,4 +67,12 @@ public class UserEntity {
         this.password = password;
     }
 
+    public List<AssignedPrivilegeEntity> getAssignedPrivileges() {
+        return assignedPrivileges;
+    }
+
+    public void setAssignedPrivileges(List<AssignedPrivilegeEntity> assignedPrivileges) {
+        this.assignedPrivileges = assignedPrivileges;
+    }
+
 }
