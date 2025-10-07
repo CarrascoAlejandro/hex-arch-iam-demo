@@ -2,12 +2,15 @@ package bo.cirrus.demo.infrastructure.adapter.out.persistence.adapter;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import bo.cirrus.demo.domain.model.Privilege;
 import bo.cirrus.demo.domain.port.out.repository.PrivilegeRepository;
 import bo.cirrus.demo.infrastructure.adapter.out.persistence.entity.PrivilegeEntity;
 import bo.cirrus.demo.infrastructure.adapter.out.persistence.mapper.PrivilegeJpaMapper;
 import bo.cirrus.demo.infrastructure.adapter.out.persistence.repository.PrivilegeRepositorySQL;
 
+@Component
 public class PrivilegeJpaAdapter implements PrivilegeRepository {
 
     private final PrivilegeRepositorySQL privilegeRepositorySQL;

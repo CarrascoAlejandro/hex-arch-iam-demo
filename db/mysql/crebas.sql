@@ -1,0 +1,21 @@
+CREATE TABLE IF NOT EXISTS user (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS privilege (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL UNIQUE,
+    resource_key VARCHAR(255) NOT NULL UNIQUE
+);
+
+CREATE TABLE IF NOT EXISTS assigned_privilege (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    assigned_since VARCHAR(255) NOT NULL,
+    user_id BIGINT NOT NULL,
+    privilege_id BIGINT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user(id),
+    FOREIGN KEY (privilege_id) REFERENCES privilege(id)
+);

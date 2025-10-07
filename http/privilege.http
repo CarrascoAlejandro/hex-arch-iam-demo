@@ -1,0 +1,20 @@
+GET http://localhost:8080/privilege/list
+Accept: application/json
+
+###
+GET http://localhost:8080/privilege/1
+Accept: application/json
+
+### 
+GET http://localhost:8080/privilege?name=READ_PRIVILEGE
+Accept: application/json
+
+###
+POST http://localhost:8080/privilege
+Content-Type: application/json
+Accept: application/json
+
+{
+    "name": "UPDATE_PRIVILEGE",
+    "resourceKey": "UPDATE_RESOURCE"
+}

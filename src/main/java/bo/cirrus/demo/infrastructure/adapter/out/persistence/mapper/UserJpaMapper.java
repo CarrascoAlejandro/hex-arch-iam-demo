@@ -1,13 +1,14 @@
 package bo.cirrus.demo.infrastructure.adapter.out.persistence.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
 
 import bo.cirrus.demo.domain.model.User;
 import bo.cirrus.demo.infrastructure.adapter.out.persistence.entity.UserEntity;
 
 import org.mapstruct.Mapping;
 
-@Mapper
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface UserJpaMapper {
 
     @Mapping(source = "id", target = "id")

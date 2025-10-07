@@ -1,10 +1,13 @@
 package bo.cirrus.demo.infrastructure.adapter.out.persistence.entity;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -22,7 +25,11 @@ public class PrivilegeEntity {
     @Column(name = "resource_key", unique = true, nullable = false)
     private String resourceKey;
 
+    @OneToMany(mappedBy = "privilege")
+    private List<AssignedPrivilegeEntity> assignedPrivileges;
+
     public PrivilegeEntity() {
+        // Required by JPA Entity specification
     }
 
     public Long getId() {

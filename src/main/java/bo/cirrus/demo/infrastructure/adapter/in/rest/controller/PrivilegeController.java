@@ -48,7 +48,10 @@ public class PrivilegeController {
     }
 
     @GetMapping()
-    public ResponseEntity<GlobalWebResponseDto<PrivilegeWebResponseDto>> findByNameOrResourceKey(@RequestParam String name, @RequestParam String resourceKey) {
+    public ResponseEntity<GlobalWebResponseDto<PrivilegeWebResponseDto>> findByNameOrResourceKey(
+        @RequestParam(required = false) String name,
+        @RequestParam(required = false) String resourceKey
+    ) {
         var privilege = privilegeManagementUseCase.findByNameOrResourceKey(name, resourceKey);
         var responseDto = privilegeWebMapper.toWebResponseDto(privilege);
         return ResponseEntity.ok(new GlobalWebResponseDto<>("PRV-1000", null, responseDto));

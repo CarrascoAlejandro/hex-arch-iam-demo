@@ -43,7 +43,10 @@ public class UserController {
     }
 
     @GetMapping()
-    public ResponseEntity<GlobalWebResponseDto<UserWebResponseDto>> findByUsernameOrEmail(@RequestParam String username, @RequestParam String email) {
+    public ResponseEntity<GlobalWebResponseDto<UserWebResponseDto>> findByUsernameOrEmail(
+        @RequestParam(required = false) String username, 
+        @RequestParam(required = false) String email
+    ) {
         User user = userManagementUseCase.findByUsernameOrEmail(username, email);
         UserWebResponseDto userResponse = userWebMapper.domainToWebResponseDto(user);
         return ResponseEntity.ok(new GlobalWebResponseDto<>("USR-1000", null, userResponse));

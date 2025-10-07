@@ -2,12 +2,15 @@ package bo.cirrus.demo.infrastructure.adapter.out.persistence.adapter;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import bo.cirrus.demo.domain.model.User;
 import bo.cirrus.demo.domain.port.out.repository.UserRepository;
 import bo.cirrus.demo.infrastructure.adapter.out.persistence.entity.UserEntity;
 import bo.cirrus.demo.infrastructure.adapter.out.persistence.mapper.UserJpaMapper;
 import bo.cirrus.demo.infrastructure.adapter.out.persistence.repository.UserRepositorySQL;
 
+@Component
 public class UserJpaAdapter implements UserRepository {
 
     

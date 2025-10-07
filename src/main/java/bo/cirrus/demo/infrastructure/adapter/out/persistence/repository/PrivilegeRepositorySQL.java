@@ -1,5 +1,7 @@
 package bo.cirrus.demo.infrastructure.adapter.out.persistence.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import bo.cirrus.demo.infrastructure.adapter.out.persistence.entity.PrivilegeEntity;
@@ -8,5 +10,7 @@ public interface PrivilegeRepositorySQL extends JpaRepository<PrivilegeEntity, L
     boolean existsByName(String name);
     boolean existsByResourceKey(String resourceKey);
     PrivilegeEntity findByNameOrResourceKey(String name, String resourceKey);
+    Optional<PrivilegeEntity> findByName(String name);
+    Optional<PrivilegeEntity> findByResourceKey(String resourceKey);
     
 }

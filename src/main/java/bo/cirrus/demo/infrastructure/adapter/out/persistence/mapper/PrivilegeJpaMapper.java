@@ -1,11 +1,12 @@
 package bo.cirrus.demo.infrastructure.adapter.out.persistence.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingConstants;
 
 import bo.cirrus.demo.domain.model.Privilege;
 import bo.cirrus.demo.infrastructure.adapter.out.persistence.entity.PrivilegeEntity;
 
-@Mapper
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
 public interface PrivilegeJpaMapper {
 
     
